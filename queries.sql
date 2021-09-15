@@ -141,7 +141,8 @@ FROM dept_manager AS dm
     INNER JOIN current_emp AS ce
         ON (dm.emp_no = ce.emp_no);
 
---3rd List: department retirees, again we use current_emp table
+--3rd List: department retirees, again we use current_emp table. Information of
+--retirees with name of the department
 SELECT ce.emp_no,
 ce.first_name,
 ce.last_name,
@@ -152,3 +153,15 @@ INNER JOIN dept_emp AS de
 ON (ce.emp_no = de.emp_no)
 INNER JOIN departments AS d
 ON (de.dept_no = d.dept_no);
+
+-- tailored tables: retirement employees for sales department only
+-- we use dept_info table and filter it by dept name
+SELECT * INTO sales_info
+FROM dept_info
+WHERE (dept_info.dept_name = 'Sales');
+
+-- table for sale and development departments
+SELECT * INTO saldev_info
+FROM dept_info
+WHERE dept_name IN('Sales','Development'); --IN summarizes ORs conditions
+
